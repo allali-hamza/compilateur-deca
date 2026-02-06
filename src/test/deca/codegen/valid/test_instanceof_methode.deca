@@ -1,0 +1,34 @@
+// Description:
+//    Test instanceof à l'intérieur d'une méthode 
+//
+// Resultats:
+//    Analyse de l'objet...
+//    C'est un B !
+//    Analyse de l'objet...
+//    C'est un A (mais pas un B) !
+
+class A {}
+class B extends A {}
+
+class Check {
+    void identify(A obj) {
+        println("Analyse de l'objet...");
+        
+        if (obj instanceof B) {
+            println("C'est un B !");
+        } else {
+            if (obj instanceof A) {
+                println("C'est un A (mais pas un B) !");
+            }
+        }
+    }
+}
+
+{
+    Check checker = new Check();
+    A monA = new A();
+    A monB = new B(); // Polymorphisme
+
+    checker.identify(monB); 
+    checker.identify(monA); 
+}

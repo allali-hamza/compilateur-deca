@@ -1,0 +1,33 @@
+// Description:
+//    Test de la gestion de la pile via des appels de méthodes imbriqués.
+//
+// Resultats attendus:
+//    Main: 1
+//    Niveau 1: 2
+//    Niveau 2: 3
+//    Re-Niveau 1: 2
+//    Re-Main: 1
+
+class TestScope {
+    void niveau2() {
+        int x = 3; 
+        println("Niveau 2: ", x);
+    }
+
+    void niveau1() {
+        int x = 2; 
+        println("Niveau 1: ", x);
+        niveau2();
+        println("Re-Niveau 1: ", x);
+    }
+}
+
+{
+    TestScope t = new TestScope();
+    int x = 1; 
+    println("Resultat Attendu : 1, 2, 3, 2, 1");
+    println("Main: ", x);
+    
+    t.niveau1();
+    println("Re-Main: ", x);
+}

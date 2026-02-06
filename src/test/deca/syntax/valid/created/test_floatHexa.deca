@@ -1,0 +1,10 @@
+//Description
+//  Déclaration de float en hexadécimal
+//
+//Résultat
+//  ok
+
+{
+    float x = 0x222.FP0;
+    float x = 0X0.0p0;
+}

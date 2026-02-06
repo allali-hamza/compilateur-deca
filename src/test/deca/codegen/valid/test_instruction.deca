@@ -1,0 +1,75 @@
+// Description:
+//    Test complet instructions
+// Resultats attendus:
+//
+{
+    int i = 10;
+    float f = 2.5;      
+    boolean b = true;   
+
+
+    i = i + 1;
+    println("Op: +1 | Attendu : 11 | Obtenu : ", i);
+
+    i = i - 1;
+    println("Op: -1 | Attendu : 10 | Obtenu : ", i);
+
+    i = i * 2;
+    println("Op: *2 | Attendu : 20 | Obtenu : ", i);
+
+    i = i / 2;
+    println("Op: /2 | Attendu : 10 | Obtenu : ", i);
+
+    i = i % 2;
+    println("Op: %2 | Attendu : 0 | Obtenu : ", i);
+
+    i = -i;
+    println("Op: unary- | Attendu : 0 | Obtenu : ", i);
+
+    f = i + 0.0;
+    println("Op: Conv | Attendu : 0.00000e+00 | Obtenu : ", f);
+
+
+    if (i == 0) { 
+        println("Comp: == | Attendu : Egal | Obtenu : Egal"); 
+    }
+    if (i != 0) { 
+        println("Comp: != | Attendu : (Rien) | Obtenu : Different"); 
+    }
+    if (i < 10) { 
+        println("Comp: <  | Attendu : Inf | Obtenu : Inf"); 
+    }
+    if (i <= 10) { 
+        println("Comp: <= | Attendu : InfEgal | Obtenu : InfEgal"); 
+    }
+    if (i > 10) { 
+        println("Comp: >  | Attendu : (Rien) | Obtenu : Sup"); 
+    }
+    if (i >= 10) { 
+        println("Comp: >= | Attendu : (Rien) | Obtenu : SupEgal"); 
+    }
+
+
+    if (b && true) {    
+        println("Log: && | Attendu : Et | Obtenu : Et");
+    }
+    if (b || false) {   
+        println("Log: || | Attendu : Ou | Obtenu : Ou");
+    }
+    if (!b) {            
+        println("Log: !  | Attendu : (Rien) | Obtenu : Non");
+    }
+
+
+    while (i < 5) {     
+        i = i + 1;
+    }
+    println("While | Attendu : 5 | Obtenu : ", i);
+    
+
+    if (false) {
+        println("Else | Attendu : (Rien) | Obtenu : Jamais");
+    } else {            
+        println("Else | Attendu : Toujours | Obtenu : Toujours");
+    }
+}

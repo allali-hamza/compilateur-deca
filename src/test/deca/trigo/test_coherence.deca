@@ -1,0 +1,17 @@
+//Description : Programme testant la cohérence entre sin et asin
+#include "Math.decah"
+{   
+    Math m = new Math();
+    float x;
+    float y;
+    float eps = 1.0E-5;
+
+    x = -1.0;
+    while (x <= 1.0) {
+        y = m.sin(m.asin(x));
+        println("x=" ,x , 
+                " sin(asin(x))=" , y ,
+                " erreur=" , (y - x));
+        x = x + 0.1;
+    }
+}

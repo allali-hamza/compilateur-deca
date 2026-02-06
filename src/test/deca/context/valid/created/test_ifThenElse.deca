@@ -1,0 +1,23 @@
+{
+    int a = 10;
+    int b = 20;
+
+    if (a < b) {
+        println("C'est b le boss");
+        a = a + 1;
+    } else {
+        println("C'est a le boss");
+        b = b + 1;
+    }
+
+    if (a == 11) {
+        println("Premier niveau");
+        if (b > 0) {
+            println("Deuxieme niveau (doit etre bien decale)");
+        } else {
+            println("Sinon deuxieme niveau");
+        }
+    } else {
+        println("Sinon premier niveau");
+    }
+}

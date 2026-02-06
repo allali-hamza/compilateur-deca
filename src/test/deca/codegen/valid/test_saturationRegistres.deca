@@ -1,0 +1,22 @@
+// Description:
+//    Test de saturation des registres (Register Spilling)
+// Resultats attendus:
+//    Resultat: 128
+
+class A {
+    int i = 1;
+}
+
+{
+    A a = new A();
+    int res;
+    res = (a.i + (a.i + (a.i + (a.i + (a.i + (a.i + (a.i + (a.i + (a.i + (a.i + (a.i + (a.i + a.i)))))))))))) // 13 termes
+        * (a.i + a.i + a.i) // * 3
+        + (a.i * a.i * a.i) // + 1
+        + (a.i + 2);        // + 3
+    
+    res = (a.i + (a.i * (a.i + (a.i * (a.i + (a.i * (a.i + (a.i * (a.i + 1)))))))));    
+    res = (a.i+a.i) * (a.i+a.i) * (a.i+a.i) * (a.i+a.i) * (a.i+a.i) * (a.i+a.i) * (a.i+a.i);
+    println("Resultat attendu : 128");
+    println("Obtenu : ", res);
+}

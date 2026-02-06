@@ -1,0 +1,15 @@
+// Resultat : Erreur : Debordement de la pile
+class A{
+	int c;
+
+	void erreur(int pileRemplie){
+		this.erreur(pileRemplie);
+	}
+}
+
+{
+	A a = new A();
+    println("Resultat attendu : Erreur : Debordement de la pile  ");
+    println("Obtenu : ");
+	a.erreur(0);
+}

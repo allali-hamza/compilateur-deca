@@ -1,0 +1,598 @@
+// Grenoble INP - Ensimag projet GL -*- mode: java -*-
+// Library for class Math of Deca, coded in Deca
+
+class Math {
+
+    float pi = 3.14159265359;
+
+    // Valeurs sigma codées en dur,on peut aller jusqu'à 52 valeurs
+    float sigma0 = 0.7853982;
+    float sigma1 = 0.4636476;
+    float sigma2 = 0.24497867;
+    float sigma3 = 0.124354996;
+    float sigma4 = 0.06241881;
+    float sigma5 = 0.031239834;
+    float sigma6 = 0.015623729;
+    float sigma7 = 0.007812341;
+    float sigma8 = 0.0039062302;
+    float sigma9 = 0.0019531226;
+    float sigma10 = 9.765622E-4;
+    float sigma11 = 4.8828122E-4;
+    float sigma12 = 2.4414062E-4;
+    float sigma13 = 1.2207031E-4;
+    float sigma14 = 6.1035156E-5;
+    float sigma15 = 3.0517578E-5;
+    float sigma16 = 1.5258789E-5;
+    float sigma17 = 7.6293945E-6;
+    float sigma18 = 3.8146973E-6;
+    float sigma19 = 1.9073486E-6;
+    float sigma20 = 9.536743E-7;
+    float sigma21 = 4.7683716E-7;
+    float sigma22 = 2.3841858E-7;
+    float sigma23 = 1.1920929E-7;
+    float sigma24 = 5.9604645E-8;
+ 
+    
+    float getSigma(int index) asm (
+                "LOAD -3(LB), R0    
+                LOAD -2(LB), R1    ;
+                
+                ;Vérification de sécurité
+                CMP #0, R0
+                BLT sigma_error
+                CMP #50, R0
+                BGT sigma_error
+                ADD R1, R0         ;R0 =Adresse de base + index
+                LOAD 2(R0), R0     ;On applique l'offset fixe VTable + pi ici
+               
+                RTS
+
+            sigma_error:
+                WSTR \"Erreur : Index sigma hors limites\"
+                WNL
+                ERROR"
+            );
+
+
+    float sin(float f) {
+            // Constantes Double-Précision pour 2*PI
+            float TWO_PI_HI = 6.2831855;
+            float TWO_PI_LO = -1.7484556E-7;
+            
+            // Constantes Double-Précision pour PI
+            float PI_HI = 3.1415927;
+            float PI_LO = -8.742278E-8;
+
+            int k;
+
+        
+            if (f < 1.0E-10 && f > -1.0E-10) { return 0.0;}
+            if(f < 0.1 && f > -0.1) {return f - f*f*f/6;} //approximation de taylor à l'ordre 3
+            // Réduction modulo 2*PI par Waite
+
+            k = (int)(f / TWO_PI_HI);
+            f = f - ((float)(k) * TWO_PI_HI);
+            f = f - ((float)(k) * TWO_PI_LO);
+
+            // Normalisation 
+            
+            if (f > 3.1415927) { 
+                f = f - TWO_PI_HI;
+                f = f - TWO_PI_LO;
+            } else if (f < -3.1415927) {
+                f = f + TWO_PI_HI;
+                f = f + TWO_PI_LO;
+            }
+            
+          
+            
+            
+            // sin(x) = sin(pi - x)
+            if (f > 1.5707963) { // f > pi/2
+                // f devient (pi - f)
+                // Calcul précis : (PI_HI + PI_LO) - f
+                f = PI_HI - f;
+                f = f + PI_LO;
+            } else if (f < -1.5707963) { // f < -pi/2
+                // f devient (-pi - f)
+                // Calcul précis : (-PI_HI - PI_LO) - f
+                f = -PI_HI - f;
+                f = f - PI_LO;
+            }
+
+
+            return this.sinCordic(f);
+        }
+
+    float sinCordic(float angle) asm (
+        "   
+            PUSH R2
+            PUSH R3
+            PUSH R4
+            PUSH R5
+            PUSH R6
+            PUSH R7
+            PUSH R8 
+
+            LOAD -3(LB), R4       ;angle
+            LOAD -2(LB), R0       ;this
+
+            ;Initialisation
+            LOAD #0x0.9B74EDp0, R2
+            LOAD #0.0, R3
+            LOAD #0, R5
+            LOAD #1.0, R6
+
+        loop_sin:
+            CMP #25, R5
+            BGE end_sin
+            
+            
+            LEA 2(R0, R5), R7
+            LOAD 0(R7), R8        ;R8 contient sigma[i]
+            
+            LOAD R2, R1           ;save_cos
+            
+            CMP #0.0, R4
+            BLT rot_negative
+
+        rot_positive:
+            ;x = x - y * p
+            LOAD R3, R7
+            MUL R6, R7
+            SUB R7, R2
+            
+            ;y = y + x_old * p
+            LOAD R1, R7
+            MUL R6, R7
+            ADD R7, R3
+            
+            SUB R8, R4            ;z = z - sigma
+            BRA next_iter
+
+        rot_negative:
+            ;x = x + y * p
+            LOAD R3, R7
+            MUL R6, R7
+            ADD R7, R2
+            
+            ;y = y - x_old * p
+            LOAD R1, R7
+            MUL R6, R7
+            SUB R7, R3
+            
+            ADD R8, R4            ;z = z + sigma 
+
+        next_iter:
+            MUL #0.5, R6
+            ADD #1, R5
+            BRA loop_sin
+
+        end_sin:
+            LOAD R3, R0           ;Résultat dans R0
+
+          
+            POP R8
+            POP R7
+            POP R6
+            POP R5
+            POP R4
+            POP R3
+            POP R2
+            RTS"
+    );
+
+float cos(float f) {
+        // Constantes Double-Précision (Identiques à sin)
+        float TWO_PI_HI = 6.2831855;
+        float TWO_PI_LO = -1.7484556E-7;
+        float PI_HI = 3.1415927;
+        float PI_LO = -8.742278E-8;
+
+        int k;
+        int invertSign = 0;// Pour gérer cos(pi - x) = -cos(x)
+
+        // 1. Optimisation triviale pour 0
+        if (f < 1.0E-10 && f > -1.0E-10) { return 1.0;}
+        if (f < 0.01 && f > -0.01) { return 1.0 - f*f/2;}
+        // Réduction modulo 2*PI (Cody-Waite)
+        k = (int)(f / TWO_PI_HI);
+        f = f - ((float)(k) * TWO_PI_HI);
+        f = f - ((float)(k) * TWO_PI_LO);
+
+        // Normalization
+        if (f > 3.1415927) {
+            f = f - TWO_PI_HI;
+            f = f - TWO_PI_LO;
+        } else if (f < -3.1415927) {
+            f = f + TWO_PI_HI;
+            f = f + TWO_PI_LO;
+        }
+
+        
+        //ici cos diffère de sin
+        // car cos(x) = -cos(pi - x)
+        // cos(x) = -cos(-pi - x)
+        if (f > 1.5707963) {
+            
+            f = PI_HI - f;
+            f = f + PI_LO;
+            invertSign = 1;
+        } else if (f < -1.5707963) {
+            
+            f = -PI_HI - f;
+            f = f - PI_LO;
+            invertSign = 1;
+        }
+
+        
+        //Si on a replié l'angle alors il faut inverser le résultat final
+        if (invertSign == 1) {
+            return -this.cosCordic(f);
+        } else {
+            return this.cosCordic(f);
+        }
+    }
+    
+        float cosCordic(float angle) asm (
+        "    ;R2=x, R3=y, R4=z, R5=i, R6=p(2^-i), R0=this
+             LOAD -3(LB), R4      ;Récupère l'angle
+             LOAD -2(LB), R0      ;Récupère 'this'
+
+             ;Initialisation
+             LOAD #0x0.9B74EDp0, R2  ;K = 0.607
+             LOAD #0.0, R3           ;y = 0
+             LOAD #0, R5             ;i = 0
+             LOAD #1.0, R6           ;p = 1.0
+
+        loop_cos:
+             CMP #25, R5             
+             BGE end_cos
+             
+           
+             
+             LEA 2(R0, R5), R7   
+             LOAD 0(R7), R7       
+         
+             LOAD R2, R1          ;R1 = save_cos x ancien
+             
+             CMP #0.0, R4         ;Test du signe de l'angle résiduel z
+             BLT rot_neg_cos
+
+        rot_pos_cos:
+             ;x = x - y * p
+             PUSH R7              
+             LOAD R3, R7
+             MUL R6, R7
+             SUB R7, R2           
+
+             ;y = y + x_old * p
+             LOAD R1, R7
+             MUL R6, R7
+             ADD R7, R3           
+             
+             POP R7           
+             SUB R7, R4       
+             BRA next_cos
+
+        rot_neg_cos:
+             ;x = x + y * p
+             PUSH R7
+             LOAD R3, R7
+             MUL R6, R7
+             ADD R7, R2           
+             
+             ;y = y - x_old * p
+             LOAD R1, R7
+             MUL R6, R7
+             SUB R7, R3           
+             
+             POP R7
+             ADD R7, R4           
+
+        next_cos:
+             MUL #0.5, R6         ;p = p * 0.5
+             ADD #1, R5
+             BRA loop_cos
+
+        end_cos:
+             LOAD R2, R0          ;Retourne X (cos) dans R0
+             RTS"
+    );
+
+   
+    float atan(float x) asm (
+        "
+            
+            ;R0 = this
+            ;R1 = argument original 
+            ;R2 = cordic x initialisé à 1
+            ;R3 = cordic y
+            ;R4 = z l'angle accumulé
+            ;R5 = i
+            ;R6 = p = 2^-i
+            ;R7,R8 temporaires
+            ;R9 = signe flag 
+            ;R10 = inverse flag(1 si on a remplacé x par 1/x)
+        
+
+            LOAD -3(LB), R1        ;R1 = argument original (x)
+            LOAD -2(LB), R0        ;this
+            LOAD #0, R9            ;sign = 0
+            LOAD #0, R10           ;inverse = 0
+
+            ;gestion de signe
+            LOAD R1, R7
+            SUB #0.0, R7           ;R7 = R1 - 0.0
+            BLT atan_neg_sign
+            BRA atan_abs_check
+
+        atan_neg_sign:
+            OPP R1, R1
+            LOAD #1, R9
+
+        atan_abs_check:
+            ;pour eviter les imprécisions on remplace le calcul des grandes valeurs par le calcul de l'inverse
+            LOAD R1, R7
+            SUB #1.0, R7           ;R7 = R1 - 1.0
+            BGT atan_do_inverse
+            BRA atan_init
+
+        atan_do_inverse:
+            LOAD #1.0, R2
+            DIV R1, R2             ;R2 = 1.0 / |x|
+            LOAD R2, R1            ;R1 = 1/|x|
+            LOAD #1, R10           ;marqueur : on a inversé
+
+        atan_init:
+            ;mode vectoring
+            LOAD #1.0, R2          ;cordic x = 1.0
+            LOAD R1, R3            ;cordic y = argument (|x| or 1/|x|)
+            LOAD #0.0, R4          ;z = 0
+            LOAD #0, R5            ;i = 0
+            LOAD #1.0, R6          ;p = 1.0
+
+        atan_loop:
+            CMP #25, R5
+            BGE atan_end
+
+            LEA 2(R0, R5), R7
+            LOAD 0(R7), R7         ;sigma[i] dans r7
+
+            LOAD R2, R8            ;x dans R8
+
+            ;test sign of y (R3)
+            LOAD R3, R7
+            SUB #0.0, R7
+            BLT atan_neg
+            BRA atan_pos
+
+        atan_pos:
+            ;x = x + y*p
+            LOAD R3, R7
+            MUL R6, R7
+            ADD R7, R2
+
+            ;y = y - x_old*p
+            LOAD R8, R7
+            MUL R6, R7
+            SUB R7, R3
+
+            ;z += sigma[i]
+            LEA 2(R0, R5), R7
+            LOAD 0(R7), R7
+            ADD R7, R4
+            BRA atan_next
+
+        atan_neg:
+            ;x = x - y*p
+            LOAD R3, R7
+            MUL R6, R7
+            SUB R7, R2
+
+            ;y = y + x_old*p
+            LOAD R8, R7
+            MUL R6, R7
+            ADD R7, R3
+
+            ;z -= sigma[i]
+            LEA 2(R0, R5), R7
+            LOAD 0(R7), R7
+            SUB R7, R4
+
+        atan_next:
+            MUL #0.5, R6
+            ADD #1, R5
+            BRA atan_loop
+
+        atan_end:
+            ; si on a utilisé 1/x amors atan(x) =pi/2 - atan(1/x) 
+            CMP #0, R10
+            BEQ atan_sign
+
+            LOAD #1.57079632679, R7
+            SUB R4, R7
+            LOAD R7, R4
+
+        atan_sign:
+            CMP #0, R9
+            BEQ atan_return
+            OPP R4, R4
+
+        atan_return:
+            LOAD R4, R0
+            RTS
+        "
+        );
+
+
+
+        float asin(float f) {
+        if (f > 1 || f < -1) {
+            println("Veuillez entrez une valeur coprise entre -1 et 1.");
+            return -2;
+        }
+        return this.asinCordic(f);
+    }
+    
+    
+    float asinCordic(float val) asm (
+        "  
+            PUSH R2
+            PUSH R3
+            PUSH R4
+            PUSH R5
+            PUSH R6
+            PUSH R7
+            PUSH R8
+            PUSH R9
+
+         
+            LOAD -3(LB), R5       ;R5 = wn avec valeur d'entree f
+            
+
+            ;Initialisation
+            LOAD #1.0, R2         ;xn = 1.0
+            LOAD #0.0, R3         ;yn = 0.0
+            LOAD #0.0, R4         ;zn = 0.0
+            LOAD #0, R6           ;i = 0
+            LOAD #1.0, R7         ;exp2 = 1.0
+
+        loop_asin:
+            CMP #25, R6
+            BGE end_asin
+
+            
+           
+            LOAD -2(LB), R1       ;R1 = this
+            
+            
+            LEA 2(R1, R6), R1     ;R1 pointe sur sigma[i]
+            LOAD 0(R1), R1        ;R1 =valeur de sigma[i] 
+
+            
+            LOAD #1.0, R8         ;R8 (signx) = 1.0
+            CMP #0.0, R2
+            BGE test_yn
+            LOAD #-1.0, R8        ;R8 = -1.0
+
+        test_yn:
+            ;Compare yn et wn
+            CMP R5, R3
+            BLE rot_start         ;Si yn <= wn, on garde signx
+            OPP R8, R8            ;Sinon R8 =-signx
+
+        rot_start:
+           
+            LOAD R2, R9           ;save_xn = xn
+
+            ;xn = xn - sign * yn * exp2
+            LOAD R3, R0           ;R0 utilisé comme TEMPORAIRE
+            MUL R8, R0            ;sign * yn
+            MUL R7, R0            ;sign * yn * exp2
+            SUB R0, R2            ;xn mis à jour
+
+            ;yn = yn + sign * save_xn * exp2
+            LOAD R9, R0           ;save_xn
+            MUL R8, R0            ;sign * save_xn
+            MUL R7, R0
+            ADD R0, R3            ;yn mis à jour
+
+            ;zn = zn + sign * sigma[i]
+            LOAD R1, R0           ;sigma[i]
+            MUL R8, R0            ;sign * sigma
+            ADD R0, R4            ;zn mis à jour
+
+            ;deuxième rotation pour l'arcsin
+            LOAD R2, R9           ;nouveau save_xn
+
+            ;xn = xn - sign * yn * exp2
+            LOAD R3, R0
+            MUL R8, R0
+            MUL R7, R0
+            SUB R0, R2
+
+            ;yn = yn + sign * save_xn * exp2
+            LOAD R9, R0
+            MUL R8, R0
+            MUL R7, R0
+            ADD R0, R3
+
+            ;zn = zn + sign * sigma[i]
+            LOAD R1, R0
+            MUL R8, R0
+            ADD R0, R4
+
+            
+            ;wn = wn + wn * exp2 * exp2 pour correction d'échelle
+            LOAD R5, R0
+            MUL R7, R0
+            MUL R7, R0
+            ADD R0, R5
+
+            MUL #0.5, R7          ;exp2 = exp2 /2
+            ADD #1, R6            ;i++
+            
+            BRA loop_asin
+
+        end_asin:
+            LOAD R4, R0           ;Retourne zn
+
+          
+            POP R9
+            POP R8
+            POP R7
+            POP R6
+            POP R5
+            POP R4
+            POP R3
+            POP R2
+            RTS"
+    );
+
+
+
+    float ulp(float f) {
+        float borneInf = 8388608;
+        float borneSup = 16777216;
+        float ulp = 1;
+        if (f < 0) {
+            f = -f;
+        }
+        if (f == 0) {
+            return (float) (1.4E-45);
+        }
+        else if (f >= borneSup) {
+            while (f >= borneSup) {
+                borneInf = borneInf * 2;
+                borneSup = borneSup * 2;
+                ulp = ulp * 2;
+            }
+            return ulp;
+        }
+        else if (f < borneInf) {
+            while (f < borneInf) {
+                borneInf = borneInf / 2;
+                ulp = ulp / 2;
+            }
+            return ulp;
+        }
+        else {
+            return ulp;
+        }
+    }
+
+
+
+
+
+
+    float getPi() {
+        return pi;
+    }
+
+
+   
+}
+
+// End of Deca Math library

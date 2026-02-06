@@ -1,0 +1,44 @@
+// Description:
+//    Programme pour obenir la valeur maximale et minimale
+//    de trois nombres
+// Resultats:
+//      Maximum: 
+//      27
+//      Minimum: 
+//      8
+// 
+{
+    // Algorithme: trouver le maximum et minimum
+    int a = 15;
+    int b = 27;
+    int c = 8;
+
+    boolean trie;
+    
+    int max = a;
+    int min = a;
+    
+    if (b >= max) {
+        max = b;
+    }
+    if (c >= max) {
+        max = c;
+    }
+    
+    if (b <= min) {
+        min = b;
+    }
+    if (c <= min) {
+        min = c;
+    }
+    
+    println("Maximum: ");
+    println(max);
+    println("Minimum: ");
+    println(min);
+    
+    // Vérifier si trié
+    //trie = (a <= b) && (b <= c);
+    //println("Est trié croissant? ");
+    // println(trie);
+}

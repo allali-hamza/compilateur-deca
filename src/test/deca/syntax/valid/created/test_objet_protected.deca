@@ -1,0 +1,17 @@
+// Description:
+//    Programme testant, valide syntaxiquement mais non valide
+//
+// Resultats:
+//      
+//      
+//
+class Mere {
+    protected int secret;
+}
+
+class Fille extends Mere {
+    void revelerSecret() {
+        println(this.secret);
+        this.secret = 10;
+    }
+}

@@ -1,0 +1,85 @@
+#!/bin/bash
+
+#  On calcule le chemin ABSOLU du dossier du script 
+ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+# Vérification des arguments
+if [ "$#" -ne 2 ]; then
+    echo "Usage: ./deca_test <commande_ou_option> <fichier.deca>"
+    echo "Exemples :"
+    echo "  ./deca_test lex hello.deca     (Test Lexer)"
+    echo "  ./deca_test synt hello.deca    (Test Parser)"
+    echo "  ./deca_test ctx hello.deca     (Test Context)"
+    echo "  ./deca_test -p hello.deca      (Decac -p)"
+    echo "  ./deca_test -v hello.deca      (Decac -v)"
+    echo "  ./deca_test decac hello.deca   (Decac standard)"
+    exit 1
+fi
+
+ETAPE=$1
+NOM_FICHIER=$2
+CHEMIN_TESTS="$ROOT_DIR/src/test/deca"
+DECAC_BIN="$ROOT_DIR/src/main/bin/decac"
+
+# RECHERCHE DU FICHIER
+if [ -f "$NOM_FICHIER" ]; then
+    # Cas A : Le fichier est trouvé directement (chemin absolu ou relatif explicite)
+    FICHIER="$NOM_FICHIER"
+else
+    # On cherche le fichier dans l'arborescence de test
+    TROUVES=($(find "$CHEMIN_TESTS" -name "$NOM_FICHIER" 2>/dev/null))
+    
+    NB_TROUVES=${#TROUVES[@]}
+
+    if [ $NB_TROUVES -eq 0 ]; then
+        echo "Erreur : Fichier '$NOM_FICHIER' introuvable dans $CHEMIN_TESTS"
+        exit 1
+    elif [ $NB_TROUVES -eq 1 ]; then
+        FICHIER="${TROUVES[0]}"
+        echo "Trouvé : $FICHIER"
+    else
+        echo " Attention : Plusieurs fichiers portent ce nom :"
+        for f in "${TROUVES[@]}"; do
+            echo "  - $f"
+        done
+        FICHIER="${TROUVES[0]}"
+        echo "-> J'utilise le premier : $FICHIER"
+    fi
+fi
+
+echo "--------------------------------------------------"
+
+# Exécution
+case "$ETAPE" in
+    # --- Launchers de test (Debug) ---
+    lex)
+        echo "Traitement : LEXER"
+        "$ROOT_DIR/src/test/script/launchers/test_lex" "$FICHIER"
+        ;;
+    synt)
+        echo "Traitement : PARSER (test_synt)"
+        "$ROOT_DIR/src/test/script/launchers/test_synt" "$FICHIER"
+        ;;
+    ctx)
+        echo "Traitement : CONTEXT (test_context)"
+        "$ROOT_DIR/src/test/script/launchers/test_context" "$FICHIER"
+        ;;
+
+    # --- Decac avec options (Flags directs) ---
+    -p|-v|-n|-r|-d|-P|-b)
+        echo "Traitement : DECAC avec option $ETAPE"
+        "$DECAC_BIN" "$ETAPE" "$FICHIER"
+        ;;
+    
+    # --- Decac standard ---
+    decac)
+        echo "Traitement : DECAC (Génération de code)"
+        "$DECAC_BIN" "$FICHIER"
+        ;;
+
+    *)
+        echo "Option inconnue '$ETAPE'."
+        echo "Utilisez : lex, synt, ctx, decac, -p, -v, -n, -d, -P, -b"
+        exit 1
+        ;;
+esac

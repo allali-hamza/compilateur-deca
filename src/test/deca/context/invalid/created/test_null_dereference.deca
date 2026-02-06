@@ -1,0 +1,33 @@
+// Description:
+//    Test de dereferencement null s
+//
+// Resultats attendus (en execution):
+//    Erreur : dereferencement de null
+
+class Region {
+    int code = 38;
+}
+
+class France {
+    Region getRegion(int id) {
+        Region nullRegion;
+        if (id == 0) {
+            return new Region();
+        } else {
+            return nullRegion;
+        }
+    }
+}
+
+{
+    France fr = new France();
+    int x;
+    println("Resultat attendu :  Erreur : dereferencement de null ");
+    println("Obtenu : "); 
+    println(fr.getRegion(0).code);
+
+    x = fr.getRegion(1).code;
+}
+
+
+

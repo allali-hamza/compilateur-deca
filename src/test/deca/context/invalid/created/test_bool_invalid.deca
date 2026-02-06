@@ -1,0 +1,5 @@
+{
+    boolean b;
+    // Erreur : 1 n'est pas un booléen
+    b = true && 1; 
+}

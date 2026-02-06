@@ -1,0 +1,19 @@
+//
+// Description: Teste de méthode asm
+//      
+//
+// Resultats:
+//      1
+
+class A {
+    float a = 1;
+    float getIntA() asm(
+        "LOAD -2(LB), R1
+        LOAD 1(R1), R0
+        RTS");
+}
+
+{
+    A intA = new A();
+    println(intA.getIntA());
+}

@@ -1,0 +1,10 @@
+// Description:
+//    Code valide suivi de déchets après l'accolade fermante du main.
+
+
+{
+    println("Main fini");
+}
+
+int x = 0; // Interdit hors classe ou main
+blabla     // Interdit

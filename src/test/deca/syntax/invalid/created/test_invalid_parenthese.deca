@@ -1,0 +1,12 @@
+class A{
+    float x;
+    int getX(){
+        return x
+    }
+}
+
+{
+    A a = new getX;
+    A.x;
+    A.getX();
+}

@@ -1,0 +1,10 @@
+
+class A {}
+{
+    Object obj1 = new Object();
+    A obj2;
+   
+    if (obj2.equals(obj1)) {
+        println("le test passe");
+    }
+}

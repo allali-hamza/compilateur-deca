@@ -1,0 +1,10 @@
+//Description
+//  Déclaration de print avec plusieurs arguments
+//
+//Résultat
+//  ok
+
+{
+    int a ;
+    println("a vaut ",a);
+}

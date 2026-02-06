@@ -1,0 +1,42 @@
+class TestRecursion1 {
+    int global1;
+    int global2;
+    
+    int recursif(int n, int marker) {
+        int local1;
+        int local2;
+        int local3;
+        int result;
+        
+        local1 = marker;
+        local2 = marker * 2;
+        local3 = marker * 3;
+        
+        if (n > 0) {
+            result = this.recursif(n - 1, marker + 100);
+                if (local1 != marker) {
+                println("ERREUR: local1 corrompu à n=", n);
+                println("  Attendu: ", marker);
+                println("  Reçu: ", local1);
+            }
+            if (local2 != marker * 2) {
+                println("ERREUR: local2 corrompu à n=", n);
+            }
+            if (local3 != marker * 3) {
+                println("ERREUR: local3 corrompu à n=", n);
+            }
+        } else {
+            result = marker;
+        }
+        
+        return result + local1;
+    }
+}
+{
+
+    TestRecursion1 t1 = new TestRecursion1();
+    int res1;
+    res1 = t1.recursif(8, 1000);
+    println("Resultat attendu : 14400 ");
+    println("Obtenu: ", res1);
+}

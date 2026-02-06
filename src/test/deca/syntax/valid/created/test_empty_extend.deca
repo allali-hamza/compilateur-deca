@@ -1,0 +1,13 @@
+// Description:
+//    Test des structures vides et cas limites acceptés par la grammaire.
+//
+// Resultats:
+//    Doit produire un arbre valide avec des listes vides (ListDeclField, etc.)
+
+// Classe vide
+class A {
+}
+
+// Classe avec extends mais vide
+class B extends A {
+}

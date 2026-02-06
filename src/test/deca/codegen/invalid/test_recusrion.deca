@@ -1,0 +1,24 @@
+// Description:
+//    Récursion infinie pour tester le Stack Overflow.
+//
+// Resultats attendus:
+//    Erreur : Debordement de la pile
+
+class Recursive {
+    int appels = 0;
+    
+    void plongeon() {
+        int locale = 1; 
+        appels = appels + 1;
+        if (appels % 1000 == 0) {
+            println("Profondeur : ", appels);
+        }
+        this.plongeon(); 
+    }
+}
+
+{
+    Recursive r = new Recursive();
+    println("Resultat attendu : Debordement de la pile " );
+    r.plongeon();
+}

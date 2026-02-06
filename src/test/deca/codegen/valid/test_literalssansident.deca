@@ -1,0 +1,16 @@
+// Description:
+//  tester les instructions formé d'une opération
+//  arithmètique sans identification
+//
+//Resultats:
+//   
+
+{
+    1;
+    2.5;
+    3*3;
+    -4;
+    5 +6.7;
+    8/9;
+    10%11;
+}

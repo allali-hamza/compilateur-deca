@@ -1,0 +1,22 @@
+// Description:
+//    Test des priorités et de la syntaxe spécifique du Cast GL56.
+//    Votre grammaire impose (Type)(Expr).
+//
+
+
+{
+    int x;
+    float f;
+    boolean b;
+
+    f = (float)(x + 1);
+
+    // 2. Associativité Gauche (1 - 2) - 3
+    x = 1 - 2 - 3;
+
+    b = true && false || true;
+
+    x = 1 + 2 * 3;
+
+    b = ! (true);
+}

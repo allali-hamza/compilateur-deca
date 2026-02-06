@@ -1,0 +1,12 @@
+// Description:
+//   tester l'empilemenet des classes et leurs extensions
+//
+// Resultats: 
+//   
+class X{}
+class Y extends X{}
+//main
+{
+    X x = new X();
+    Y y = new Y();
+}

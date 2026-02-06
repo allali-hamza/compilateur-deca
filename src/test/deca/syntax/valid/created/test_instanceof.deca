@@ -1,0 +1,13 @@
+// Description:
+//    Programme minimaliste testant le instanceof et l'héritage
+//
+// Resultats:
+//      Vraie
+class A{}
+class B extends A{}
+{
+    B b = new B();
+    if(b instanceof A){
+        println("Vraie");
+    }
+}

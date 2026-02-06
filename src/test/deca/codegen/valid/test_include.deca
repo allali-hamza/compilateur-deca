@@ -1,0 +1,12 @@
+// Description:
+//  Tester si include marche ou pas
+//
+//Resultats: 
+//  
+
+#include "test_selection.deca"
+
+{
+    A b = new A();
+    b.bool = true;
+}

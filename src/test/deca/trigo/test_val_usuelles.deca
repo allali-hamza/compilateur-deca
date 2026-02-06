@@ -1,0 +1,166 @@
+//Descriptioin :  test donnant plusieurs valeurs aux nos fonctions trigonométriques
+#include "Math.decah"
+
+   
+{
+    Math m = new Math();
+
+    float x;
+    float res;
+    float ref;
+    float err;
+    float ulp;
+    float tol;
+
+    int failures = 0;
+
+  
+    x = 0.0;
+    res = m.sin(x);
+    ref = 0.0;
+
+    err = res - ref;
+    if (err < 0) { err = -err; }
+
+    ulp = m.ulp(1.0);
+    tol = 4.0 * ulp;
+
+    println("sin(0)");
+    println("resultat :",res); println("reference :",ref); println("ecart :",err); println("ulp :",ulp);
+
+    if (err > tol) { failures = failures + 1; }
+
+    x = m.getPi() / 6.0;
+    res = m.sin(x);
+    ref = 0.5;
+
+    err = res - ref;
+    if (err < 0) { err = -err; }
+
+    ulp = m.ulp(ref);
+    tol = 5.0 * ulp;
+
+    println("sin(pi/6)");
+    println("resultat :",res); println("reference :",ref); println("ecart :",err); println("ulp :",ulp);
+
+    if (err > tol) { failures = failures + 1; }
+
+   
+    x = 0.0;
+    res = m.cos(x);
+    ref = 1.0;
+
+    err = res - ref;
+    if (err < 0) { err = -err; }
+
+    ulp = m.ulp(1.0);
+    tol = 4.0 * ulp;
+
+    println("cos(0)");
+    println("resultat :",res); println("reference :",ref); println("ecart :",err); println("ulp :",ulp);
+
+    if (err > tol) { failures = failures + 1; }
+
+
+    x = m.getPi() / 3.0;
+    res = m.cos(x);
+    ref = 0.5;
+
+    err = res - ref;
+    if (err < 0) { err = -err; }
+
+    ulp = m.ulp(ref);
+    tol = 6.0 * ulp;
+
+    println("cos(pi/3)");
+    println("resultat :",res); println("reference :",ref); println("ecart :",err); println("ulp :",ulp);
+
+    if (err > tol) { failures = failures + 1; }
+
+  
+    x = 1.0;
+    res = m.atan(x);
+    ref = m.getPi() / 4.0;
+
+    err = res - ref;
+    if (err < 0) { err = -err; }
+
+    ulp = m.ulp(1.0);
+    tol = 5.0 * ulp;
+
+    println("atan(1)");
+    println("resultat :",res); println("reference :",ref); println("ecart :",err); println("ulp :",ulp);
+
+    if (err > tol) { failures = failures + 1; }
+
+
+    x = 10.0;
+    res = m.atan(x);
+    ref = 1.47112767;
+
+    err = res - ref;
+    if (err < 0) { err = -err; }
+
+    ulp = m.ulp(1.0);
+    tol = 10.0 * ulp;
+
+    println("atan(10)");
+    println("resultat :",res); println("reference :",ref); println("ecart :",err); println("ulp :",ulp);
+
+    if (err > tol) { failures = failures + 1; }
+
+  
+    x = 100.0;
+    res = m.atan(x);
+    ref = 1.56079666;
+
+    err = res - ref;
+    if (err < 0) { err = -err; }
+
+    ulp = m.ulp(1.0);
+    tol = 12.0 * ulp;
+
+    println("atan(100)");
+    println("resultat :",res); println("reference :",ref); println("ecart :",err); println("ulp :",ulp);
+
+    if (err > tol) { failures = failures + 1; }
+
+    x = 1000000.0;
+    res = m.atan(x);
+    ref = m.getPi() / 2.0;
+
+    err = res - ref;
+    if (err < 0) { err = -err; }
+
+    ulp = m.ulp(1.0);
+    tol = 15.0 * ulp;
+
+    println("atan(1e6)");
+    println("resultat :",res); println("reference :",ref); println("ecart :",err); println("ulp :",ulp);
+
+    if (err > tol) { failures = failures + 1; }
+
+  
+    x = 0.5;
+    res = m.asin(x);
+    ref = m.getPi() / 6.0;
+
+    err = res - ref;
+    if (err < 0) { err = -err; }
+
+    ulp = m.ulp(ref);
+    tol = 6.0 * ulp;
+
+    println("asin(0.5)");
+    println("resultat :",res); println("reference :",ref); println("ecart :",err); println("ulp :",ulp);
+
+    if (err > tol) { failures = failures + 1; }
+
+  
+    if (failures == 0) {
+        println("ALL TESTS PASSED");
+    } else {
+        println("FAILURES");
+        println(failures);
+    }
+}

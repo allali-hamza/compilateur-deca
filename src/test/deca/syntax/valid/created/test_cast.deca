@@ -1,0 +1,11 @@
+// Description:
+//    Programme minimaliste testant le caste
+//
+// Resultats:
+//  
+//
+ 
+{
+    int x;
+    float y = (float)(x); 
+}

@@ -1,0 +1,14 @@
+{
+    int x = 0;
+    boolean encours = true;
+
+    while (encours) {
+        if (x == 5) {
+            println("Moitie atteinte");
+        } else if (x >= 10) {
+            println("Fini !");
+            encours = false; // Arrêt de la boucle
+        }
+        x = x + 1;
+    }
+}

@@ -1,0 +1,17 @@
+// Description:
+//    Programme minimaliste testant le instanceof et l'héritage
+//
+// Resultats:
+//    3.00000e+00
+class A{
+    int x;
+    float y;
+    void setY(int a){
+        this.y = a; 
+    }
+}
+{
+    A aa = new A();
+    aa.setY(3);
+    println(aa.y);
+}

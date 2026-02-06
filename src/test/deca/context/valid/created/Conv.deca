@@ -1,0 +1,23 @@
+class A
+{
+  int a;
+  float hello(int a, float b)
+  {
+    return a;
+  }
+}
+class B extends A
+{
+  int a = 0;
+  float hello(int a, float b)
+  {
+    return b;
+  }
+}
+{
+  A r = new B();
+  float e;
+  r = new B();
+  e = r.hello(1, 4);
+  print(r.a);
+}

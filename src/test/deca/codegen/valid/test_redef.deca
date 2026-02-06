@@ -1,0 +1,22 @@
+// Description:
+//   tester la redefinition le comportement des methodes si on a une extension
+//
+// Resultats: 0 1
+//   
+class A{
+    int a = 0;
+    int getIntA(){
+        return a;
+    }
+}
+
+class B extends A{
+    int a = 1;
+}
+{
+    A aa = new A();
+   
+    B ab = new B();
+    println(aa.getIntA() , " ");
+    println(ab.getIntA());
+}

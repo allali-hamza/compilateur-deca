@@ -1,0 +1,25 @@
+// Description:
+//    Appels de méthodes chaînés .
+//
+// Resultats attendus:
+//    compteur : 1
+//    compteur : 2
+//    compteur : 3
+//    ... jusqu'à 10
+
+class Compteur {
+    int val = 0;
+
+    Compteur incr() {
+        val = val + 1;
+        println("compteur : ", val);
+        return this;
+    }
+}
+
+{
+    Compteur c = new Compteur();
+    println("Resultat attendu : 1,2,...,10");
+    println("Obtenu");
+    c.incr().incr().incr().incr().incr().incr().incr().incr().incr().incr();
+}

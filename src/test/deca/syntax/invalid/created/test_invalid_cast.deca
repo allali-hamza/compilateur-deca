@@ -1,0 +1,5 @@
+{
+   // Erreur syntaxique attendue 
+   // car elle attend une parenthèse ouvrante après (int)
+   (int) 5; 
+}

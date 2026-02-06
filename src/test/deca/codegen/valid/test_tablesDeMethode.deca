@@ -1,0 +1,74 @@
+// Description:
+//    Test complet de la VTable et du masquage de champs (Shadowing)
+//
+// Resultats attendus:
+//    
+//    
+
+class A {
+    int x = 5;
+    int y;
+    int z;
+    int louis = 100*100;
+    
+    int getX(){
+        return x; 
+    }
+}
+
+class B extends A {
+    int y = 9;
+    int x = 10; 
+    float a;    
+    float b = 12.4;
+    
+    float testB(int c){
+        return a + b + x;
+    }
+    
+    int getX(){
+        return x - 5;
+    }
+}
+
+class C extends B {
+    int x = 15; 
+    
+    int getX(){
+        return x - 10;
+    }
+    
+    boolean testC(boolean bool){
+        return bool;
+    }
+}
+
+{
+    A a = new A();
+    B b = new B();
+    C c = new C();
+    
+    A poly_b = new B(); 
+    B poly_c = new C(); 
+
+    println("Attendu : 5");
+    println("Obtenu  : ", a.getX());
+
+    println("Attendu : 5");
+    println("Obtenu  : ", b.getX());
+
+    println("Attendu : 5");
+    println("Obtenu  : ", c.getX());
+
+    println("Attendu : 5");
+    println("Obtenu  : ", poly_b.getX());
+
+    println("Attendu : 5");
+    println("Obtenu  : ", poly_c.getX());
+
+    println("Attendu : 2.24000e+01");
+    println("Obtenu  : ", b.testB(0));
+
+    println("Attendu : 2.24000e+01");
+    println("Obtenu  : ", c.testB(0));
+}

@@ -1,0 +1,12 @@
+//Description :
+//	test de while
+//
+//Résultats :
+//	ok 
+
+
+{int x = 0;
+while (x< 10) {
+    x = x + 1;
+    }
+}

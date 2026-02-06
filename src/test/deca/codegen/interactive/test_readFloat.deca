@@ -1,0 +1,15 @@
+// Description :
+//     test de lecture de flottants avec readFloat
+//
+// Resultats :
+//     ok
+
+{
+    float x;
+    float y;
+    print("Entrez le premier flottant :");
+    x = readFloat();
+    print("Entrez le deuxième flottant :");
+    y = readFloat();
+    println("Somme :", x + y);
+}

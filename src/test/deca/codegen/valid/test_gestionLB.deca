@@ -1,0 +1,38 @@
+// Test  pour vérifier la sauvegarde du registre LB
+class TestLB {
+    int test(int n) {
+        int v1 = n;         
+        int v2 = n * 10;   
+        int res;
+
+        if (n > 0) {
+            res = this.test(n - 1);
+            if (v1 != n) {
+                println("Erreur v1 : attendu ", n, " mais recu ", v1);
+            }
+            if (v2 != n * 10) {
+                println("Erreur v2 : attendu ", n * 10, " mais recu ", v2);
+            }
+        } else {
+            res = 0;
+        }
+        return res;
+    }
+    int fibo(int n) {
+        if (n <= 1) {
+            return 1;
+        }
+        return this.fibo(n - 1) + this.fibo(n - 2);
+    }
+}
+
+{
+    TestLB t = new TestLB();
+    int res;
+
+    t.test(10);
+    println(t.test(10));
+    res = t.fibo(6); 
+    println("Fibo(6) = ( resultat attendu 13 )  Obtenu : ", res);
+
+}

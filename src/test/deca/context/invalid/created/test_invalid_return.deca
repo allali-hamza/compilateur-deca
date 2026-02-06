@@ -1,0 +1,7 @@
+class A{
+    float x;
+    int getX(){
+        x = 1.2;
+        return x;
+    }
+}

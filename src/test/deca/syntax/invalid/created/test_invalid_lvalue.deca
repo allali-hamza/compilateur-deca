@@ -1,0 +1,14 @@
+// Description:
+//    Tentative d'affectation à une R-value (quelque chose qui n'est pas une variable).
+//    Une méthode retourne une valeur, on ne peut pas lui assigner quelque chose.
+
+
+class A {
+    int getX() { return 0; }
+}
+
+{
+    A a = new A();
+    // Interdit : on ne peut pas assigner à un appel de méthode
+    a.getX() = 3; 
+}

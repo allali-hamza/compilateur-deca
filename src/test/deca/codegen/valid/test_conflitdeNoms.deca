@@ -1,0 +1,24 @@
+// Description:
+//    Test de conflit de noms et de priorités.
+//    Une classe A, qui contient un champ A, et une méthode A...
+//
+// Resultats attendus:
+//    10
+//    2
+class A {
+    int A = 10; // Champ
+
+
+    void maMethode(int A) { 
+        println("Resultat attendu : 10");
+        println("Obtenu : ", this.A); 
+        
+        println("Resultat attendu : 20");
+        println("Obtenu : ", A);      
+    }
+}
+
+{
+    A a = new A();
+    a.maMethode(20);
+}

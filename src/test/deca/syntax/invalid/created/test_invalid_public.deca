@@ -1,0 +1,4 @@
+class A {
+    // Erreur : 'public' n'existe pas pour les champs en Deca
+    public int x; 
+}

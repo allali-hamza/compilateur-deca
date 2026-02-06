@@ -1,0 +1,31 @@
+// Description:
+//    Test du comportement de null avec instanceof
+//
+// Resultats:
+//    OK : null n'est pas A
+//    OK : null n'est pas Object
+//    OK : a non initialise n'est pas A
+
+class A {}
+
+{
+   A a; 
+   
+   if (null instanceof A) {
+      println("ERREUR : null est considéré comme A");
+   } else {
+      println("OK : null n'est pas A");
+   }
+
+   if (null instanceof Object) {
+      println("ERREUR : null est considéré comme Object");
+   } else {
+      println("OK : null n'est pas Object");
+   }
+
+   if (a instanceof A) {
+       println("ERREUR : a (null) est considéré comme A");
+   } else {
+       println("OK : a non initialise n'est pas A");
+   }
+}

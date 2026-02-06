@@ -1,0 +1,21 @@
+class Y
+{
+
+}
+class X
+{
+  int a;
+  boolean b = true;
+}
+
+
+class B
+{
+  Y y = new Y();
+  float a;
+
+}
+{
+  X x = new X();
+  Y e = (boolean)(x.a);
+}

@@ -1,0 +1,20 @@
+// Description:
+//    Programme testantle chainage des méthodes
+//
+// Resultats:
+//      
+class A {
+    int x;
+    A getMe() {
+        return this;
+    }
+}
+
+{
+    A a = new A();
+
+    a.getMe().getMe().x = 3;
+    
+
+    new A().x = 5;
+}

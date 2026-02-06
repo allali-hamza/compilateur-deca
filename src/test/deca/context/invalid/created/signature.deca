@@ -1,0 +1,9 @@
+class A
+{
+  float b(int a){}
+}
+
+class B extends A
+{
+  float b(){}
+}

@@ -1,0 +1,28 @@
+// Description:
+//    Programme testant instance et cast 
+//
+// Resultats:
+//      C'est un B
+//
+class A { }
+class B extends A { }
+
+class Test {
+    A a;
+    B b;
+    void m() {
+
+        this.a = null;
+        
+        if (this.a == null) {
+
+            this.a = new B();
+        }
+
+        if (a instanceof B) {
+            println("C'est un B");
+        }
+
+        b = (B)(a);
+    }
+}

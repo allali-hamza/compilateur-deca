@@ -1,0 +1,10 @@
+//Description
+//  test du cast dans l'arbre
+//
+//Résultat
+//  ok
+
+{
+    int x;
+    x = (int) (4);
+}

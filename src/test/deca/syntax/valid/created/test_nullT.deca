@@ -1,0 +1,10 @@
+//Description
+//  Déclaration de null
+//
+//Résultat
+//  ok
+
+{
+    int x = 0;
+    x = null;
+}

@@ -1,0 +1,22 @@
+// Description:
+//    Test du retour de 'this' 
+//
+// Resultats:
+//    Resultat Attendu : 3
+//    Resultat : 3
+
+class Chaine {
+    int val = 0;
+
+    Chaine add() {
+        this.val = this.val + 1;
+        return this;
+    }
+}
+
+{
+    Chaine c = new Chaine();
+    c.add().add().add();
+    println("Resultat Attendu : 3");
+    println("Resultat : ", c.val);
+}

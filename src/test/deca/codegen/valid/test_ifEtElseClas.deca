@@ -1,0 +1,18 @@
+// Description:
+//    tests de la déclaration d'une seule class
+//
+// Resultats:
+//    Rien
+
+
+class A{}
+
+{
+	A a = null;
+	if(a == null){
+        println("Resultat Attendu : ok");
+		println("Resultat : ok");
+	} else{
+		println("pas ok");
+	}
+}

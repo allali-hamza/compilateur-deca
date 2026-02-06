@@ -1,0 +1,11 @@
+//Description
+//  multiple opérations sur booléens
+//
+//Résultat
+//  ok
+
+{
+    boolean x = true;
+    boolean y = false;
+    boolean z = (x || y) && (x && y);
+}

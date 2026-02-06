@@ -1,0 +1,24 @@
+// Description:
+//    Programme pour obenir minimale pour tester les classes et les getters
+//    
+// Resultats:
+//      42
+//      
+//      
+//      
+// 
+class A {
+    int x;
+    void setX(int val) {
+        this.x = val;
+    }
+    int getX() {
+        return x;
+    }
+}
+
+{
+    A a = new A();
+    a.setX(42);
+    println(a.getX());
+}

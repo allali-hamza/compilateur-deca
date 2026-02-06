@@ -1,0 +1,23 @@
+// Description:
+//    Allocation infinie jusqu'à saturation mémoire
+//
+// Resultats attendus (en execution):
+//    Erreur : tas plein
+
+class Etudiant_Grenoble_INP {
+    int matricule;
+    float moyenne;
+    // On met des champs pour prendre de la place
+    int a,b,c,d,e,f,g,h;
+}
+
+{
+    Etudiant_Grenoble_INP e;
+    println("Recrutement massif à l'INP...");
+    
+    while (true) {
+        // On alloue, on alloue, on alloue...
+        // On ne libère jamais. Le registre 'free' va atteindre la fin de la mémoire.
+        e = new Etudiant_Grenoble_INP();
+    }
+}

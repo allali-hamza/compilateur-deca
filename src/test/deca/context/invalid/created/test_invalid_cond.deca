@@ -1,0 +1,21 @@
+
+{
+    boolean b;
+    boolean c;
+
+    // la condition doit être boolean 
+    if (5) {
+        println("Test");
+    }
+
+    // la  condition doit être boolean 
+    while (42) {
+        println("Boucle");
+    }
+
+    
+    b = true && 5; 
+
+   
+    c = "abc" < 5; 
+}

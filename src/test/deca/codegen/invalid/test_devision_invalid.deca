@@ -1,0 +1,8 @@
+{
+    int a = 12;
+    int b = 0;
+    float res ;
+    res = a/b;
+    println("La devision de  par b est ",res);
+
+}

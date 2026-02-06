@@ -1,0 +1,14 @@
+// Description:
+//   tester l'empilemenet des classes et les getters
+//
+//  Resultats: 
+//   
+class A{
+    int a;
+    A setA(B b){
+        
+        return b;
+    }
+}
+
+class B extends A{}

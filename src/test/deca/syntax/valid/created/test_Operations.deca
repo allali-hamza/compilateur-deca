@@ -1,0 +1,15 @@
+//Description :
+//	test des opérations binaires
+//
+//Résultats :
+//	ok 
+
+{
+    int x = 1;
+    int y = 3;
+    x = x + y;
+    y = x + y * x;
+    x = (x + y) * x;
+    x = x + y / y;
+    y = ( x + x + 3) / 5;
+}

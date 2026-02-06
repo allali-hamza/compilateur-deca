@@ -1,0 +1,23 @@
+class Y
+{
+
+}
+class X
+{
+  int a;
+  boolean b = true;
+}
+
+
+class B
+{
+  X x = new X();
+  Y y = new Y();
+  float a;
+  void getX()
+  {
+    if (x.a || a){
+      a = 0;
+    }
+  }
+}

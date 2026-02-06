@@ -1,0 +1,16 @@
+// Description:
+//    Test du modulo par zéro (interdit)
+//
+// Resultats attendus (en execution):
+//    Erreur : division par zero (ou message equivalent pour modulo)
+
+{
+    int nbAnimaux = 100;
+    int capaciteCage_ZOO = 0;
+    int resultat;
+
+    println("Calcul de répartition du ZOO...");
+    println("Resultat attendu : Erreur : division par zero");
+    println("Obtenu : ");
+    resultat = nbAnimaux % capaciteCage_ZOO;
+}

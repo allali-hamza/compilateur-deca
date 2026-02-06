@@ -1,0 +1,26 @@
+// Description:
+//    tester l'empilement des variables locales et leurs comportements
+//
+// Resultats: a=9
+//    
+class A {
+    int a;
+    
+    void setIntA(int p){
+        a = p;
+    }
+    
+    void add(int b){
+        int c = 3;
+        int d = 0; 
+        int e = 6;         
+        // a = a + (b - c * 0) => a = a + b
+        a = a + (b - c * (d/e)); 
+    }
+}
+{
+    A instA = new A();
+    instA.setIntA(5); 
+    instA.add(4);
+    println("a=" , instA.a);
+}

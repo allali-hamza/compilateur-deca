@@ -1,0 +1,10 @@
+// Description:
+//  Tester la selection  d'un attribu publique
+//
+//Resultats: false
+//   
+class A{
+
+    boolean bool = false;
+ 
+}

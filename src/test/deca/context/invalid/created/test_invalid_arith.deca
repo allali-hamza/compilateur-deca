@@ -1,0 +1,17 @@
+
+// test_invalid_arith.deca
+{
+	// Déclarations
+	int x;
+	float y;
+	boolean b;
+
+	// Affectations invalides
+	x = true;     
+	y = readInt(); 
+	b = x;         
+	// Opérations invalides
+	x = x + true;  
+	y = y + b;     
+	b = true && x; 
+}

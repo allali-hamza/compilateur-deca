@@ -1,0 +1,32 @@
+// Description:
+//    Test d'expressions valides syntaxiquement mais inutiles .
+//
+// Resultats attendus:
+//    "Fin normale"
+//    
+
+class A {
+    int x;
+    int getX() { 
+        return x; 
+    }
+}
+
+{
+    A a = new A();
+    int x = 0;
+
+    1; 
+    
+    1 + 2 * 3; 
+    
+    x == 0;
+    
+    new A(); 
+    
+    a.getX();
+    
+    (new A()).getX();
+
+    println("Fin normale");
+}

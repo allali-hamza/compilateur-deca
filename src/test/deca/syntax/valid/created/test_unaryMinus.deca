@@ -1,0 +1,11 @@
+//Description:
+//test de UnaryMinus
+//
+//Resultat:
+//
+
+{
+    float x = 1;
+    x = -x;
+    x = - (x+x);
+}

@@ -1,0 +1,9 @@
+//Description
+//  test du modulo
+//
+//Résultat
+//  ok
+
+{
+    int x = 11 % 2;
+}

@@ -1,0 +1,6 @@
+class Y {
+  int  a (int k) {
+   println("ddd");
+
+  }
+}

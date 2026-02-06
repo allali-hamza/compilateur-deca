@@ -1,0 +1,23 @@
+class A{
+int x = 8;
+int fact(int n, int k){
+    if(n == 0){
+        return 1;
+    }
+    else{
+        return 4;
+    }
+}
+void hello()
+{
+  x = fact(0, 0);
+}
+}
+{
+int a = 0;int b=4;
+
+if (false)
+{
+ println("accepter");
+}
+}

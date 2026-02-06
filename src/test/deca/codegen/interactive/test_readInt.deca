@@ -1,0 +1,13 @@
+// Description :
+//     test de lecture d'entiers avec readInt
+//
+// Resultats :
+//     
+
+{
+    int x;
+    print("Entrez un entier :");
+    x = readInt();
+    println("Valeur lue :", x);
+    println("Double de la valeur :", x * 2);
+}

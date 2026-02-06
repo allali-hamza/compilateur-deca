@@ -1,0 +1,20 @@
+
+class A{
+ int x = 2;
+ int getInc(){
+	return x+1;
+	}	
+}
+
+class B{
+A a = new A();
+float main(){
+	return a.getInc();
+}
+}
+
+{
+B b = new B();
+println(b.main());
+
+}

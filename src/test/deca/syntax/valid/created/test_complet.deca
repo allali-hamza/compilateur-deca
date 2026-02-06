@@ -1,0 +1,20 @@
+// Description:
+//    Test des capacités avancées du lexer : flottants, echappements, commentaires.
+//
+
+
+{
+    //  Flottants notation scientifique (Grammaire Deca le supporte souvent)
+    float f1 = 1.0E+5;
+    float f2 = 1.0e-5;
+    float f3 = 0.5E2;
+    float f4 = 0x1.Fp2; // Hexadecimal float 
+
+    //  Chaines avec caractères spéciaux
+    String s1 = "Chaine avec \"guillemets\" et \\ backslash";
+    String s2 = "Ligne1\nLigne2";
+    
+    //  Commentaires collés
+    int/*commentaire*/x=1; // Le lexer doit bien séparer les tokens
+    int y=2;//Commentaire fin de ligne
+}

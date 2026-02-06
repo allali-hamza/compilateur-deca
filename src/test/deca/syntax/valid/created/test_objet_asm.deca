@@ -1,0 +1,11 @@
+class Test {
+
+    void methodeNormale() {
+        println("Hello");
+    }
+
+    void methodeAssembleur() asm("
+        WSTR \"Ceci est de l'assembleur pur\"
+        HALT
+    "); 
+}

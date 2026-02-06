@@ -1,0 +1,32 @@
+// Description:
+//    Programme testant extends
+//
+// Resultats:
+//      Coin Coin
+//      Flap flap  
+//      
+//
+class Animal {
+    int pattes = 4;
+    void crier() {
+        println("...");
+    }
+}
+
+class Canard extends Animal {
+    // Redéfinition (Override)
+    void crier() {
+        println("Coin Coin");
+    }
+    
+    // Nouvelle méthode
+    void voler() {
+        println("Flap flap");
+    }
+}
+
+{
+    Animal a = new Canard();
+    a.crier(); 
+    ((Canard)(a)).voler(); // Test du cast pour appeler voler
+}

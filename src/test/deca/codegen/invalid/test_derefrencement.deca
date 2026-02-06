@@ -1,0 +1,16 @@
+// Description:
+//    Test de dereferencement null 
+//
+// Resultats attendus (en execution):
+//    Erreur : dereferencement de null
+
+class Region {
+    int code = 38;
+}
+
+{
+    Region r; 
+    println("Resultat attendu : dereferencement de null");
+    println("Obtenu");
+    println(r.code); 
+}

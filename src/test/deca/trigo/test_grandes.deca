@@ -1,0 +1,24 @@
+//Description :teste des valeurs grandes de sin
+#include "Math.decah"
+{
+    Math m = new Math();
+    float x;
+    float s1;
+    float s2;
+    float twoPi;
+
+    twoPi = 2 * m.getPi();
+    x = 1.0E3;
+
+    while (x <= 1.0E7) {
+        s1 = m.sin(x);
+        s2 = m.sin(x + twoPi);
+
+        println("x=", x,
+                " sin(x)=", s1,
+                " sin(x+2pi)=", s2,
+                " diff=", (s1 - s2));
+
+        x = x * 10;
+    }
+}

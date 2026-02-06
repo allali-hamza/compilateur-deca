@@ -1,0 +1,5 @@
+// Erreur : on ne peut pas faire "extends" sans nom de classe après
+
+class A extends B{ 
+    int x;
+}

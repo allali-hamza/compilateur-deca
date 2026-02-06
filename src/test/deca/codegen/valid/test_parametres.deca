@@ -1,0 +1,28 @@
+// Description:
+//   tester l'empilemenet des classes et les paramètres 
+//
+//  Resultats: a=9
+//   
+
+class A{
+    int a;
+    void setIntA(int p){
+        a = p;
+    }
+    A setA(B b){
+        return b;
+    }
+
+    void add(int b, int c, int d, int e){
+        a = a +(b - c*(d/e));
+    }
+}
+class B extends A{
+
+}
+{
+    A instA = new A();
+    instA.setIntA(5);
+    instA.add(4 ,3 , 0, 6);
+    println("a=" , instA.a);
+}

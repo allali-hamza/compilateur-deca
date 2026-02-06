@@ -1,0 +1,19 @@
+class A {
+    protected  int  var ;
+    int getVar(){
+        return var ;
+    }
+    void m() {
+       
+    }
+    
+}
+
+class B {
+   
+    
+    void test() {
+         A a = new A();
+      println(a.getVar()) ;
+    }
+}

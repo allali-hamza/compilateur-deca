@@ -1,0 +1,9 @@
+{
+    boolean a = true;
+    boolean b = false;
+    boolean c;
+    
+    // Test && et || avec des booléens
+    c = a && b; 
+    c = (1 < 2) || (3 == 3); 
+}

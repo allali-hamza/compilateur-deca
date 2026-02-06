@@ -1,0 +1,12 @@
+// Description:
+//    test de multiplication de deux nombres très grands
+//
+// Resultats:
+//  Erreur: il y a overflow
+
+{
+   float x = 9.0e+30;
+   float y = x*x;
+   println(x);
+   println(y);
+}

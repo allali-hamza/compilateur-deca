@@ -1,0 +1,6 @@
+class A {
+}
+{
+    // (Main)
+    println("Hello world !");
+}

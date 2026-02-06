@@ -1,0 +1,35 @@
+class A {
+    int x;
+}
+
+class B {
+
+    A a = null;
+
+    A getNull() {
+        return null;
+    }
+
+    void setNull() {
+        this.a = null;
+    }
+}
+
+{
+    A obj;
+    B b = new B();
+
+    obj = new A();
+    obj = null;
+
+    if (obj == null) {
+        println("obj est bien null");
+    }
+
+    obj = b.getNull();
+    if (obj != null) {
+        println("non null");
+    } else {
+        println(" OK");
+    }
+}

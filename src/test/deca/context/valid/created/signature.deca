@@ -1,0 +1,8 @@
+
+
+class B 
+{
+  int b(int d ){
+   return (3) ;
+  }
+}

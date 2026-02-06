@@ -1,0 +1,9 @@
+//Description:
+//On vérifie si 0 en Hexadecimal est accepté
+//
+//Resultat:
+//ok
+
+{
+    float x = 0x0.0p0;
+}

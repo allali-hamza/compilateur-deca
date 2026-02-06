@@ -1,0 +1,24 @@
+class Y
+{
+
+}
+class X
+{
+  int a;
+  boolean b = true;
+}
+
+
+class B
+{
+  X x = new X();
+  Y y = new Y();
+  float a;
+  void getX()
+  {
+    while (x.a < a){
+      a = (x.a + a);
+      a = (X)(a + readFloat());
+    }
+  }
+}

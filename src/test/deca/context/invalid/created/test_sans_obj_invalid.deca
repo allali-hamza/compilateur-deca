@@ -1,0 +1,14 @@
+
+{
+    int a;
+    float b;
+    boolean c;
+
+   
+    c = readInt();        // Erreur : affectation int vers boolean
+    println(c);          
+    
+    println(b + true);    
+    
+  
+}

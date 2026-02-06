@@ -1,0 +1,25 @@
+// Description:
+//    Cast descendant invalide 
+//
+// Resultats attendus (en execution):
+//    Erreur : Cast incorrect
+
+class Etudiant_UGA {
+    int carte_etudiant = 12345;
+}
+
+class Eleve_Ingenieur extends Etudiant_UGA {
+    int note_Projet_GL = 20;
+}
+
+{
+    Etudiant_UGA lambda = new Etudiant_UGA();
+    
+    Eleve_Ingenieur ingenieur_Ensimag;
+    println(" Resultat attendu : Erreur Cast incorrect");
+    println(" Obtenu : ");
+    ingenieur_Ensimag = (Eleve_Ingenieur) (lambda);
+
+
+    println(ingenieur_Ensimag.note_Projet_GL);
+}

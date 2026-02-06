@@ -1,0 +1,15 @@
+// Description:
+//    Programme testant une version de fact 2
+//
+// Resultats:
+//      
+//
+// 
+{
+   int result = 1;
+    int i = 2;
+    while (i > 0) {
+        result = result * i;
+        i = i - 1;
+    }
+}

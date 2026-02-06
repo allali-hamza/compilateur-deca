@@ -1,0 +1,27 @@
+// Description:
+//    Programme pour tester l'héritage 
+//    
+// Resultats:
+//      4 
+// 
+class Animal {
+    int legs = 4;
+}
+
+class Dog extends Animal {
+    int wagTail() {
+        return 1;
+    }
+}
+
+class Zoo {
+    Animal getAnimal() {
+        return new Dog(); 
+    }
+}
+
+{
+    Zoo z = new Zoo();
+    Animal a = z.getAnimal();
+    println(a.legs);  // Attendu: 4
+}

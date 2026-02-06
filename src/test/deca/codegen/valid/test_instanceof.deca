@@ -1,0 +1,33 @@
+// Description:
+//    Test de l'héritage profond et de la classe racine Object
+//
+// Resultats:
+//    OK : C est un C
+//    OK : C est un B
+//    OK : C est un A
+//    OK : C est un Object
+//    OK : A n'est pas un C
+
+class A {}
+class B extends A {}
+class C extends B {}
+
+{
+   A a = new A();
+   C c = new C();
+
+   if (c instanceof C) { println("OK : C est un C"); } 
+   else { println("ERREUR : C n'est pas un C"); }
+
+   if (c instanceof B) { println("OK : C est un B"); }
+   else { println("ERREUR : C n'est pas un B"); }
+
+   if (c instanceof A) { println("OK : C est un A"); }
+   else { println("ERREUR : C n'est pas un A"); }
+
+   if (c instanceof Object) { println("OK : C est un Object"); }
+   else { println("ERREUR : C n'est pas un Object"); }
+
+   if (a instanceof C) { println("ERREUR : A est un C"); }
+   else { println("OK : A n'est pas un C"); }
+}

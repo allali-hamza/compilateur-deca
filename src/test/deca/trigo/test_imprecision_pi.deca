@@ -1,0 +1,63 @@
+// Descrption :  ce test décrit le comportement de l'ajout de pi de valeur plus précise, résultant à une accumulatioins d'erreur,
+//              l'ajout des premier pi est stable, mais quand k augmente on voit des anomalies, c'est résultat d'imprécision de pi
+//
+//Résultat : l'ajout des premier pi est stable, mais quand k augmente on voit des anomalies, c'est résultat d'imprécision de pi
+//
+//
+//
+//
+//
+#include "Math.decah"
+{
+    Math m = new Math();
+    float x;
+    float s1;
+    float s2;
+    float c1;
+    float c2;
+    float pi_hi;
+    float pi_lo;
+    int k;
+    float sign;
+    float errSin;
+    float errCos;
+    float ulpSin;
+    float ulpCos;
+
+    pi_hi = 3.1415927;
+    pi_lo = -8.742278E-8;
+
+    x = 0.7;
+    k = 1;
+
+    while (k <= 10000000) {
+
+        s1 = m.sin(x);
+        s2 = m.sin(x + (float)(k) * pi_hi + (float)(k) * pi_lo);
+
+        c1 = m.cos(x);
+        c2 = m.cos(x + (float)(k) * pi_hi + (float)(k) * pi_lo);
+
+        if ((k % 2) == 0) {
+            sign = 1.0;
+        } else {
+            sign = -1.0;
+        }
+
+        errSin = s2 - sign * s1;
+        errCos = c2 - sign * c1;
+
+        ulpSin = m.ulp(sign * s1);
+        ulpCos = m.ulp(sign * c1);
+
+        println("k=", k,
+                " sin(x+k*pi)=", s2,
+                " err/ulp=", errSin / ulpSin);
+
+        println("k=", k,
+                " cos(x+k*pi)=", c2,
+                " err/ulp=", errCos / ulpCos);
+
+        k = k * 10;
+    }
+}

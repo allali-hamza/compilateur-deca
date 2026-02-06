@@ -1,0 +1,38 @@
+// Description:
+//    Programme rassemblant les testes de sans objet
+//
+// Resultats:
+//      
+//
+// 
+{
+    // Déclarations d'abord
+    int n = 5;
+    int result = 1;
+    int i = 1;
+    float sum = 0.0;
+    int count = 0;
+    boolean continuer = true;
+    float val;
+    float moyenne;
+    
+    // Instructions ensuite
+    while (i <= n) {
+        result = result * i;
+        i = i + 1;
+    }
+   
+    //println("Factorielle de ", n, " = ", result);
+    
+    while (continuer && count < 10) {
+        //print("Entrez un nombre (0 pour arrêter): ");
+        val = 0.0;
+       
+        if (val == 0.0) {
+            continuer = false;
+        } else {
+            sum = sum + val;
+            count = count + 1;
+        }
+    }
+}
